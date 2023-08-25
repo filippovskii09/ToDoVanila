@@ -90,12 +90,12 @@ html, body {
 @media (max-width: 768px) {
   .todo__add {
     width: 100%;
-    height: 58px;
+    height: 64px;
   }
 }
 .todo__results {
   max-width: 1200px;
-  min-height: 300px;
+  min-height: 420px;
   border-radius: 8px;
   border: 2px solid #A35709;
   background: #242320;
