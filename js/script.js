@@ -1,13 +1,12 @@
-const deleteModalWindow = document.querySelector('.delete-modal');
-const out = document.querySelector('.todo__results')
-const title = document.querySelector('#title');
-const addItemButton = document.querySelector('.todo__add');
-const yesButton = document.querySelector('#yes')
-const noButton = document.querySelector('#no')
+const deleteModalWindow = document.querySelector('.delete-modal'),
+ 		out = document.querySelector('.todo__results'),
+ 		input = document.querySelector('#input'),
+ 		addItemButton = document.querySelector('.todo__add'),
+ 		yesButton = document.querySelector('#yes'),
+ 		noButton = document.querySelector('#no');
 
 
-
-window.onload = function () {
+window.addEventListener('DOMContentLoaded', () => {
 	const todoList = [];
 
 	function openModal() {
@@ -18,17 +17,30 @@ window.onload = function () {
 	}
 
 	addItemButton.addEventListener('click', function () {
-		if (title.value.trim().length > 0) {
+		if (input.value.trim().length > 0) {
 			let temp = {};
-			let titleResult = title.value
-			temp.todo = titleResult;
+			let inputResult = input.value
+			temp.todo = inputResult;
 			let items = todoList.length
 			todoList[items] = temp;
 
 			updateToDoList(todoList);
-			title.value = '';
+			input.value = '';
 		}
 	});
+
+	document.documentElement.addEventListener('keydown', (e) => {
+		if (e.code === 'Enter') {
+			let temp = {};
+			let inputResult = input.value
+			temp.todo = inputResult;
+			let items = todoList.length
+			todoList[items] = temp;
+
+			updateToDoList(todoList);
+			input.value = '';
+		}
+	})
 
 	function updateToDoList(list) {
 		out.innerHTML = '';
@@ -65,4 +77,4 @@ window.onload = function () {
 	} else {
 		deleteButton.addEventListener('click', )
 	}
-}
+})
