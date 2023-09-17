@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				out.innerHTML += 
 				'<li class="todo-item">' +
 					'<h2 class="item-title">' + item.todo + '</h2>' +
-					'<button class="item-delete">' + 'X' + '</button>' +
+					'<button class="item-delete">' + '<i class="material-icons">delete</i>' + '</button>' +
 				'</li>'
 			})
 			out.classList.remove('no-items')

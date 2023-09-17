@@ -156,15 +156,15 @@ html, body {
 	font-size: 14px;
 }
 .item-delete {
-	width: 30px;
 	transition: all 0.3s ease 0s;
-	height: 30px;
 	font-size: 18px;
-	border-radius: 5px;
-	border: 2px solid #A35709;
-	background: #1B1A17;
 	color: #FF8303;
+	background-color: initial;
+	border: none;
 	cursor:pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	&:hover {
 		transform: scale(1.1);
 	}
