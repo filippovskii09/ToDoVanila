@@ -1,19 +1,66 @@
-const deleteModalWindow = document.querySelector('.delete-modal'),
- 		out = document.querySelector('.todo__results'),
- 		input = document.querySelector('#input'),
- 		addItemButton = document.querySelector('.todo__add'),
- 		yesButton = document.querySelector('#yes'),
- 		noButton = document.querySelector('#no');
-
-
 window.addEventListener('DOMContentLoaded', () => {
-	const todoList = [];
+	const deleteModalWindow = document.querySelector('.delete-modal'),
+ 			out = document.querySelector('.todo__results'),
+ 			input = document.querySelector('#input'),
+ 			addItemButton = document.querySelector('.todo__add'),
+ 			yesButton = document.querySelector('#yes'),
+ 			noButton = document.querySelector('#no'),
+			resetButton = document.querySelector('.reset');
+
+	const todoList = getTodoList();
+
+	function saveTodoList(list) {
+		localStorage.setItem('todoList', JSON.stringify(list))
+	}
+
+	function getTodoList() {
+		const savedList = localStorage.getItem('todoList');
+		if (savedList !== null && savedList !== undefined) {
+			return JSON.parse(savedList);
+		} else {
+			return [];
+		}
+	}
 
 	function openModal() {
 		document.body.classList.add('modal-open')
 	}
 	function closeModal() {
 		document.body.classList.remove('modal-open')
+	}
+
+	function deleteAllItems() {
+		todoList.length = 0;
+		localStorage.clear();
+		updateToDoList(todoList);
+		closeModal();
+	}
+	
+	function updateToDoList(list) {
+		out.innerHTML = '';
+		if (list.length === 0) {
+			out.innerHTML += '<p>No tasks</p>';
+			out.classList.add("no-items")
+		} else {
+			list.forEach((item) => {
+				out.innerHTML += 
+				'<li class="todo-item">' +
+					'<h2 class="item-title">' + item.todo + '</h2>' +
+					'<button class="item-delete">' + 'X' + '</button>' +
+				'</li>'
+			})
+			out.classList.remove('no-items')
+			const deleteButton = document.querySelectorAll('.item-delete');
+			deleteButton.forEach(btn => btn.addEventListener('click', deleteTodoItem))
+		}
+		saveTodoList(list);
+	}
+
+	function deleteTodoItem(index) {
+		todoList.splice(index, 1)
+		updateToDoList(todoList)
+		saveTodoList(todoList)
+		closeModal()
 	}
 
 	addItemButton.addEventListener('click', function () {
@@ -42,39 +89,21 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	function updateToDoList(list) {
-		out.innerHTML = '';
-		if (list.length === 0) {
-			out.innerHTML += '<p>No tasks</p>';
-			out.classList.add("no-items")
-		} else {
-			list.forEach(function (item) {
-				out.innerHTML += 
-				'<li class="todo-item">' +
-					'<h2 class="item-title">' + item.todo + '</h2>' +
-					'<button class="item-delete">' + 'X' + '</button>' +
-				'</li>'
-			})
-			out.classList.remove('no-items')
-			const deleteButton = document.querySelectorAll('.item-delete');
-			deleteButton.forEach(btn => btn.addEventListener('click', openModal))
-		}
-	}
-
 	noButton.addEventListener('click', closeModal)
-	yesButton.addEventListener('click', deleteTodoItem);
-
-	function deleteTodoItem(index) {
-		todoList.splice(index, 1)
-		updateToDoList(todoList)
-		closeModal()
-	}
-
+	yesButton.addEventListener('click', deleteAllItems);
 	
+	resetButton.addEventListener('click', () => {
+		if (todoList.length > 0) {
+			openModal()
+		}
+	})
+
 	if (todoList.length === 0) {
 		out.innerHTML += '<p>No tasks</p>';
 		out.classList.add("no-items")
 	} else {
-		deleteButton.addEventListener('click', )
+		console.log('Working...');
 	}
+
+	updateToDoList(todoList)
 })

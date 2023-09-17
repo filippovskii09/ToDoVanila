@@ -11,13 +11,16 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	row-gap: 60px;
+	@media (max-width: 600px){
+		  row-gap: 25px;
+	}
 	@media (max-width: 768px){
 		  padding: 15px;
 	}
 	&__top {
 		display: flex;
 		width: 100%;
-		gap: 50px;
+		gap: 20px;
 		@media (max-width: 768px){
 			  flex-direction: column;
 			  row-gap: 20px;
@@ -41,7 +44,7 @@ html, body {
 		padding: 6px;
 		padding-left: 14px;
 		padding-right: 0;
-		height: 32px;
+		height: 37px;
 		outline: none;
 		font-size: 20px;
 		color: #fff;
@@ -61,16 +64,23 @@ html, body {
 
 	&__add {
 		width: 102px;
-		height: 102px;
+		height: 51px;
 		border-radius: 8px;
 		border: 2px solid #FF8303;
 		background: #1B1A17;
 		color: #FF8303;
-		font-size: 50px;
+		font-size: 36px;
 		cursor: pointer;
+		transition: all 0.3s ease 0s;
+		&:hover {
+			transform: scale(1.1);
+			background: #000;
+			@media (max-width: 768px){
+				  transform: scale(1);
+			}
+		}
 		@media (max-width: 768px){
 			width: 100%;
-			height: 64px;
 	 }
 	}
 	&__results {
@@ -81,6 +91,7 @@ html, body {
 		border: 2px solid #A35709;
 		background: #242320;
 		padding: 20px;
+		row-gap: 15px;
 		@media (max-width: 450px){
 			  padding: 10px;
 		}
@@ -91,7 +102,27 @@ html, body {
 		}
 	}
 }
-
+.reset {
+	width: 102px;
+	height: 51px;
+	border-radius: 8px;
+	border: 2px solid #FF8303;
+	background: #1B1A17;
+	color: #FF8303;
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+	&:hover {
+		transform: scale(1.1);
+		background: #000;
+		@media (max-width: 768px){
+			transform: scale(1);
+	 }
+	}
+	@media (max-width: 768px){
+		width: 100%;
+	}
+}
 .todo-item {
 	border-radius: 8px;
 	border: 2px solid #A35709;
@@ -126,6 +157,7 @@ html, body {
 }
 .item-delete {
 	width: 30px;
+	transition: all 0.3s ease 0s;
 	height: 30px;
 	font-size: 18px;
 	border-radius: 5px;
@@ -133,6 +165,9 @@ html, body {
 	background: #1B1A17;
 	color: #FF8303;
 	cursor:pointer;
+	&:hover {
+		transform: scale(1.1);
+	}
 	@media (max-width: 600px){
 		width: 23px;
 		height: 23px;
@@ -229,6 +264,9 @@ html, body {
 		padding-top: 60px;
 		justify-content: space-between;
 		padding-bottom: 40px;
+		@media (max-width: 600px){
+			  margin: 40px;
+		}
 	}
 }
 .modal-open .delete-modal {
